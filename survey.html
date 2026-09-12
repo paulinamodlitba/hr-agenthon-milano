@@ -78,10 +78,10 @@
   .legend b em{font-style:normal;font-size:14px;color:var(--grey);margin-left:6px}
   .legend p{margin:2px 0 0;font-size:14.5px;line-height:1.4;max-width:26ch}
   .legend li::before{content:"";position:absolute;top:-1px;left:0;width:34px;height:3px;background:var(--mark)}
-  .legend li:nth-child(1)::before{opacity:1}
-  .legend li:nth-child(2)::before{opacity:.62}
-  .legend li:nth-child(3)::before{opacity:.34}
-  .legend li:nth-child(4)::before{opacity:.16}
+  .legend li:nth-child(1)::before{opacity:.16}
+  .legend li:nth-child(2)::before{opacity:.45}
+  .legend li:nth-child(3)::before{opacity:.72}
+  .legend li:nth-child(4)::before{opacity:1}
 
   /* histograms */
   .pair{display:grid;grid-template-columns:1fr 1fr;gap:44px}
@@ -154,18 +154,18 @@
     <h2>Your hands-on experience</h2>
     <p class="note">You picked one of four descriptions. 104 of 105 answered.</p>
 
-    <div class="spread" role="img" aria-label="Daily practitioners 54 percent, workflow experimenters 37 percent, builders 7 percent, curious observers 3 percent">
-      <i style="width:53.8%;background:var(--mark)"></i>
-      <i style="width:36.5%;background:var(--mark);opacity:.62"></i>
-      <i style="width:6.7%;background:var(--mark);opacity:.34"></i>
+    <div class="spread" role="img" aria-label="Curious observers 3 percent, daily practitioners 54 percent, workflow experimenters 37 percent, builders 7 percent, in order of how much they use AI">
       <i style="width:2.9%;background:var(--mark);opacity:.16"></i>
+      <i style="width:53.8%;background:var(--mark);opacity:.45"></i>
+      <i style="width:36.5%;background:var(--mark);opacity:.72"></i>
+      <i style="width:6.7%;background:var(--mark)"></i>
     </div>
 
     <ul class="legend">
+      <li><b>3<em>3%</em></b><p>Curious observer. You rarely use AI tools yet.</p></li>
       <li><b>56<em>54%</em></b><p>Daily practitioner. You draft, summarise and search.</p></li>
       <li><b>38<em>37%</em></b><p>Workflow experimenter. You write structured prompts and upload data.</p></li>
       <li><b>7<em>7%</em></b><p>Builder. You make custom Gems, automations and low-code scripts.</p></li>
-      <li><b>3<em>3%</em></b><p>Curious observer. You rarely use AI tools yet.</p></li>
     </ul>
   </section>
 
@@ -279,10 +279,6 @@
       <li>
         <h3>Your best use cases need integrations you cannot have today</h3>
         <p>Workday configuration, ticket automation, Slack triggers, candidate FAQ bots on a live knowledge base. Nothing connects to production and everything runs on dummy data, so aim for a working prototype that proves the idea rather than a finished system.</p>
-      </li>
-      <li>
-        <h3>Time is what you said stops you, so today it is protected</h3>
-        <p>22 of you said the real blocker is time &mdash; too much trial and error before anything works. So the setup is done for you: the data pack and a first prompt for each track are ready to paste in, which means your three hours go straight into building instead of figuring out where to start.</p>
       </li>
       <li>
         <h3>You want to see what other teams build</h3>
