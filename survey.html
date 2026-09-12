@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HR Agenthon: who is in the room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5F7;
+    --ink:#0F1317;
+    --grey:#6B7178;
+    --rule:#D3D7DC;
+    --mark:#2B2FD6;
+    --wash:#D6D8F5;
+    --measure:66ch;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    font-variant-numeric:tabular-nums;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:1040px;margin:0 auto;padding:56px 32px 96px}
+  @media (max-width:640px){.sheet{padding:36px 20px 64px}}
+
+  a{color:var(--mark)}
+  :focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+
+  .masthead{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;
+    padding-bottom:14px;border-bottom:1.5px solid var(--ink)}
+  .masthead p{margin:0;color:var(--grey);font-size:14.5px}
+  .masthead .who{font-weight:600;color:var(--ink);font-size:14.5px}
+  .masthead nav{margin-left:auto;display:flex;gap:20px}
+  .masthead nav a{font-size:14px;font-weight:600;text-decoration:none;color:var(--grey)}
+  .masthead nav a:hover,.masthead nav a[aria-current="page"]{color:var(--ink)}
+
+  h1{
+    font-size:clamp(2.3rem,6.2vw,4.1rem);
+    line-height:1.02;
+    letter-spacing:-0.032em;
+    font-weight:600;
+    margin:38px 0 0;
+    max-width:19ch;
+  }
+  .standfirst{max-width:var(--measure);margin:22px 0 0;font-size:19.5px;line-height:1.5}
+  .standfirst b{font-weight:600}
+
+  .keyline{margin:34px 0 0;display:flex;flex-wrap:wrap;gap:0}
+  .keyline div{flex:1 1 150px;padding:14px 20px 14px 0;border-top:1px solid var(--rule)}
+  .keyline strong{display:block;font-size:34px;font-weight:600;letter-spacing:-0.02em;line-height:1.1}
+  .keyline span{display:block;color:var(--grey);font-size:14px;line-height:1.35;margin-top:4px;max-width:22ch}
+
+  section{margin-top:64px}
+  h2{
+    font-size:14.5px;font-weight:600;letter-spacing:0.01em;margin:0 0 4px;
+    padding-bottom:10px;border-bottom:1px solid var(--ink)
+  }
+  .note{color:var(--grey);font-size:14px;margin:10px 0 26px;max-width:var(--measure)}
+  p.body{max-width:var(--measure)}
+
+  /* proportional single bar */
+  .spread{display:flex;height:64px;border:1px solid var(--ink);overflow:hidden}
+  .spread i{display:block;height:100%}
+  .legend{margin:18px 0 0;padding:0;list-style:none;display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0}
+  .legend li{padding:12px 18px 14px 14px;border-top:1px solid var(--rule);position:relative}
+  .legend b{font-size:22px;font-weight:600;letter-spacing:-0.01em}
+  .legend b em{font-style:normal;font-size:14px;color:var(--grey);margin-left:6px}
+  .legend p{margin:2px 0 0;font-size:14.5px;line-height:1.4;max-width:26ch}
+  .legend li::before{content:"";position:absolute;top:-1px;left:0;width:34px;height:3px;background:var(--mark)}
+  .legend li:nth-child(1)::before{opacity:1}
+  .legend li:nth-child(2)::before{opacity:.62}
+  .legend li:nth-child(3)::before{opacity:.34}
+  .legend li:nth-child(4)::before{opacity:.16}
+
+  /* histograms */
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  @media (max-width:760px){.pair{grid-template-columns:1fr;gap:48px}}
+  .hist h3{font-size:17px;font-weight:600;margin:0 0 4px;max-width:34ch;line-height:1.3}
+  .hist .sub{color:var(--grey);font-size:14px;margin:0 0 20px}
+  .cols{display:flex;align-items:flex-end;gap:5px;height:150px;border-bottom:1px solid var(--ink)}
+  .cols div{flex:1;background:var(--wash);position:relative}
+  .cols div.peak{background:var(--mark)}
+  .cols div span{position:absolute;top:-19px;left:0;right:0;text-align:center;font-size:12px;color:var(--grey)}
+  .axis{display:flex;gap:5px;margin-top:6px}
+  .axis span{flex:1;text-align:center;font-size:12px;color:var(--grey)}
+
+  /* ranked bars */
+  .rank{margin:0;padding:0;list-style:none}
+  .rank li{display:grid;grid-template-columns:132px 1fr 46px;align-items:center;gap:14px;
+    padding:9px 0;border-top:1px solid var(--rule)}
+  .rank li:last-child{border-bottom:1px solid var(--rule)}
+  .rank .name{font-size:15.5px}
+  .rank .track{height:13px;background:transparent}
+  .rank .track i{display:block;height:100%;background:var(--mark)}
+  .rank li.pale .track i{background:var(--wash)}
+  .rank .n{text-align:right;font-size:15px;color:var(--grey)}
+
+  /* quotes */
+  .voices{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 34px}
+  .voices blockquote{margin:0;padding:20px 0 22px;border-top:1px solid var(--rule)}
+  .voices p{margin:0;font-size:18px;line-height:1.42;letter-spacing:-0.008em}
+  .voices cite{display:block;margin-top:10px;font-style:normal;font-size:13.5px;color:var(--grey)}
+
+  /* implications */
+  .impl{margin:0;padding:0;list-style:none;max-width:var(--measure)}
+  .impl li{padding:18px 0 20px;border-top:1px solid var(--rule)}
+  .impl h3{margin:0 0 6px;font-size:17.5px;font-weight:600;line-height:1.3}
+  .impl p{margin:0;font-size:16px;color:#31363C}
+
+  footer{margin-top:72px;padding-top:16px;border-top:1.5px solid var(--ink);
+    color:var(--grey);font-size:13.5px;max-width:var(--measure)}
+  footer a{color:var(--grey);text-decoration:underline}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <div class="masthead">
+    <p class="who">On &middot; Global HR Summit, Milano</p>
+    <p>15 September 2026 &middot; what you told us in the pre-event survey</p>
+    <nav>
+      <a href="index.html">Hub</a>
+      <a href="run-of-show.html">Run of show</a>
+      <a href="survey.html" aria-current="page">Survey</a>
+    </nav>
+  </div>
+
+  <h1>You use AI every day. Seven of you have ever built something with it.</h1>
+
+  <p class="standfirst">105 of you answered the survey. <b>Seven</b> describe yourselves as builders of custom agents, automations or low-code scripts. That gap, between using AI with confidence and never having built anything with it, is what the next three hours are for.</p>
+
+  <div class="keyline">
+    <div><strong>105</strong><span>of you answered the pre-event survey</span></div>
+    <div><strong>90%</strong><span>of you use AI at least daily for drafting, summarising or search</span></div>
+    <div><strong>7</strong><span>of you describe yourselves as builders or power users</span></div>
+    <div><strong>6.6</strong><span>your average score for AI integrated into daily routines</span></div>
+  </div>
+
+  <section>
+    <h2>Your hands-on experience</h2>
+    <p class="note">You picked one of four descriptions. 104 of 105 answered.</p>
+
+    <div class="spread" role="img" aria-label="Daily practitioners 54 percent, workflow experimenters 37 percent, builders 7 percent, curious observers 3 percent">
+      <i style="width:53.8%;background:var(--mark)"></i>
+      <i style="width:36.5%;background:var(--mark);opacity:.62"></i>
+      <i style="width:6.7%;background:var(--mark);opacity:.34"></i>
+      <i style="width:2.9%;background:var(--mark);opacity:.16"></i>
+    </div>
+
+    <ul class="legend">
+      <li><b>56<em>54%</em></b><p>Daily practitioner. You draft, summarise and search.</p></li>
+      <li><b>38<em>37%</em></b><p>Workflow experimenter. You write structured prompts and upload data.</p></li>
+      <li><b>7<em>7%</em></b><p>Builder. You make custom Gems, automations and low-code scripts.</p></li>
+      <li><b>3<em>3%</em></b><p>Curious observer. You rarely use AI tools yet.</p></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How you rate yourselves</h2>
+    <p class="note">Two statements, scored 1 to 10. The second score sits consistently above the first. You rate the output higher than you rate your own routine around it.</p>
+
+    <div class="pair">
+      <div class="hist">
+        <h3>I have fully integrated AI into my daily routines</h3>
+        <p class="sub">Mean 6.6 &middot; median 7 &middot; range 2 to 10</p>
+        <div class="cols">
+          <div style="height:0%"><span>0</span></div>
+          <div style="height:8%"><span>2</span></div>
+          <div style="height:16%"><span>4</span></div>
+          <div style="height:28%"><span>7</span></div>
+          <div style="height:72%"><span>18</span></div>
+          <div style="height:72%"><span>18</span></div>
+          <div style="height:76%"><span>19</span></div>
+          <div class="peak" style="height:100%"><span>25</span></div>
+          <div style="height:28%"><span>7</span></div>
+          <div style="height:20%"><span>5</span></div>
+        </div>
+        <div class="axis"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+      </div>
+
+      <div class="hist">
+        <h3>AI helps me produce a better final product than I could without it</h3>
+        <p class="sub">Mean 7.2 &middot; median 7 &middot; range 1 to 10</p>
+        <div class="cols">
+          <div style="height:3%"><span>1</span></div>
+          <div style="height:7%"><span>2</span></div>
+          <div style="height:10%"><span>3</span></div>
+          <div style="height:10%"><span>3</span></div>
+          <div style="height:21%"><span>6</span></div>
+          <div style="height:48%"><span>14</span></div>
+          <div class="peak" style="height:100%"><span>29</span></div>
+          <div style="height:83%"><span>24</span></div>
+          <div style="height:45%"><span>13</span></div>
+          <div style="height:34%"><span>10</span></div>
+        </div>
+        <div class="axis"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tools you use</h2>
+    <p class="note">How many of you named each tool, work and personal combined. Gemini is the shared baseline. The two tools your teams build with today sit near the bottom of this list.</p>
+    <ul class="rank">
+      <li><span class="name">Gemini</span><span class="track"><i style="width:100%"></i></span><span class="n">91</span></li>
+      <li><span class="name">ChatGPT</span><span class="track"><i style="width:70%"></i></span><span class="n">64</span></li>
+      <li><span class="name">Claude</span><span class="track"><i style="width:29.7%"></i></span><span class="n">27</span></li>
+      <li class="pale"><span class="name">Sana</span><span class="track"><i style="width:14.3%"></i></span><span class="n">13</span></li>
+      <li class="pale"><span class="name">DeepSeek</span><span class="track"><i style="width:9.9%"></i></span><span class="n">9</span></li>
+      <li class="pale"><span class="name">NotebookLM</span><span class="track"><i style="width:8.8%"></i></span><span class="n">8</span></li>
+      <li class="pale"><span class="name">Metaview</span><span class="track"><i style="width:6.6%"></i></span><span class="n">6</span></li>
+      <li><span class="name">Lovable</span><span class="track"><i style="width:3.3%"></i></span><span class="n">3</span></li>
+      <li class="pale"><span class="name">Perplexity</span><span class="track"><i style="width:2.2%"></i></span><span class="n">2</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What holds you back</h2>
+    <p class="note">Grouped by theme from your 96 written answers. One answer can touch several themes, so the numbers add up to more than 96.</p>
+    <ul class="rank">
+      <li><span class="name">Time, trial and error</span><span class="track"><i style="width:100%"></i></span><span class="n">31</span></li>
+      <li><span class="name">How to build agents</span><span class="track"><i style="width:84%"></i></span><span class="n">26</span></li>
+      <li><span class="name">Accuracy and trust</span><span class="track"><i style="width:55%"></i></span><span class="n">17</span></li>
+      <li><span class="name">Where to start</span><span class="track"><i style="width:45%"></i></span><span class="n">14</span></li>
+      <li class="pale"><span class="name">Data privacy</span><span class="track"><i style="width:32%"></i></span><span class="n">10</span></li>
+      <li class="pale"><span class="name">System integration</span><span class="track"><i style="width:32%"></i></span><span class="n">10</span></li>
+      <li class="pale"><span class="name">Prompting skill</span><span class="track"><i style="width:19%"></i></span><span class="n">6</span></li>
+      <li class="pale"><span class="name">Environmental impact</span><span class="track"><i style="width:16%"></i></span><span class="n">5</span></li>
+      <li class="pale"><span class="name">Nothing at all</span><span class="track"><i style="width:19%"></i></span><span class="n">6</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What would make today a win for you</h2>
+    <p class="note">From your 98 written answers, grouped the same way. What you asked for is remarkably consistent: not a demo, a working thing.</p>
+    <ul class="rank">
+      <li><span class="name">Build an agent</span><span class="track"><i style="width:100%"></i></span><span class="n">32</span></li>
+      <li><span class="name">Use it on Monday</span><span class="track"><i style="width:97%"></i></span><span class="n">31</span></li>
+      <li><span class="name">Learn across teams</span><span class="track"><i style="width:75%"></i></span><span class="n">24</span></li>
+      <li><span class="name">New use cases</span><span class="track"><i style="width:72%"></i></span><span class="n">23</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>In your own words</h2>
+    <div class="voices">
+      <blockquote><p>I don't know what I don't know, and I lack systematic thinking to develop an agent.</p><cite>Workflow experimenter</cite></blockquote>
+      <blockquote><p>Come with one possible automation and the knowledge on how to make it.</p><cite>On what would make the day a win</cite></blockquote>
+      <blockquote><p>Often I find myself performing a task which in the end could have been supported by AI.</p><cite>Daily practitioner</cite></blockquote>
+      <blockquote><p>We don't need to build anything production ready, but getting comfortable and feeling empowered would be a great win.</p><cite>Workflow experimenter</cite></blockquote>
+    </div>
+  </section>
+
+  <section>
+    <h2>What this means for the next three hours</h2>
+    <ul class="impl">
+      <li>
+        <h3>This is not a beginners' session</h3>
+        <p>Nine in ten of you already prompt every day, so we skip what a large language model is and start where you actually are: the shift from asking AI for text to building something that does the work.</p>
+      </li>
+      <li>
+        <h3>You build in Claude or Lovable, you work in Gemini</h3>
+        <p>91 of you named Gemini, 27 named Claude, 3 named Lovable. Today is partly about seeing what other tools can do, so you also leave with the bridge back to what you open on Monday morning.</p>
+      </li>
+      <li>
+        <h3>Your best use cases need integrations you cannot have today</h3>
+        <p>Workday configuration, ticket automation, Slack triggers, candidate FAQ bots on a live knowledge base. Nothing connects to production and everything runs on dummy data, so aim for a working prototype that proves the idea rather than a finished system.</p>
+      </li>
+      <li>
+        <h3>Time is what you said stops you, so today it is protected</h3>
+        <p>31 of you said you never get past trial and error because there is no time. Test data and a scoping template are ready, so the first half hour goes into choosing well rather than into setup.</p>
+      </li>
+      <li>
+        <h3>You want to see what other teams build</h3>
+        <p>Learning across teams was your third strongest wish. There are around 26 teams, too many for 26 demos, so the last stretch is built for looking at each other's work rather than sitting through every one of them.</p>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    HR Agenthon pre-event survey, 105 responses. Names and contact details were removed before any analysis. Theme groupings are approximate and based on a keyword review of the free-text answers. &middot; <a href="run-of-show.html">See the run of show &rarr;</a>
+  </footer>
+
+</main>
+</body>
+</html>

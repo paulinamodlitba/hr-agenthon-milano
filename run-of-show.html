@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HR Agenthon, Milano: run of show</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5F7;
+    --ink:#0F1317;
+    --grey:#6B7178;
+    --rule:#D3D7DC;
+    --mark:#2B2FD6;
+    --wash:#D6D8F5;
+    --measure:66ch;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    font-variant-numeric:tabular-nums;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:1040px;margin:0 auto;padding:56px 32px 96px}
+  @media (max-width:640px){.sheet{padding:36px 20px 64px}}
+
+  a{color:var(--mark)}
+  :focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+
+  .masthead{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;
+    padding-bottom:14px;border-bottom:1.5px solid var(--ink)}
+  .masthead p{margin:0;color:var(--grey);font-size:14.5px}
+  .masthead .who{font-weight:600;color:var(--ink);font-size:14.5px}
+  .masthead nav{margin-left:auto;display:flex;gap:20px}
+  .masthead nav a{font-size:14px;font-weight:600;text-decoration:none;color:var(--grey)}
+  .masthead nav a:hover,.masthead nav a[aria-current="page"]{color:var(--ink)}
+
+  h1{
+    font-size:clamp(2.3rem,6.2vw,4.1rem);
+    line-height:1.02;
+    letter-spacing:-0.032em;
+    font-weight:600;
+    margin:38px 0 0;
+    max-width:19ch;
+  }
+  .standfirst{max-width:var(--measure);margin:22px 0 0;font-size:19.5px;line-height:1.5}
+  .standfirst b{font-weight:600}
+
+  section{margin-top:56px}
+  h2.section{
+    font-size:14.5px;font-weight:600;letter-spacing:0.01em;margin:0 0 4px;
+    padding-bottom:10px;border-bottom:1px solid var(--ink)
+  }
+
+  /* schedule, as a ruled list rather than cards, to match the editorial system */
+  .schedule{margin:0;padding:0;list-style:none;max-width:var(--measure)}
+  .schedule li{
+    display:grid;grid-template-columns:112px 1fr;gap:22px;
+    padding:20px 0 22px;border-top:1px solid var(--rule);
+  }
+  @media (max-width:600px){.schedule li{grid-template-columns:1fr}}
+  .schedule .time{font-size:13.5px;font-weight:600;color:var(--mark);letter-spacing:0.01em;padding-top:2px}
+  .schedule h3{margin:0 0 6px;font-size:19px;font-weight:600;letter-spacing:-0.01em;line-height:1.28}
+  .schedule p{margin:0;font-size:16px;color:#31363C;max-width:60ch}
+  .schedule p + p{margin-top:8px}
+  .schedule .who{display:inline-block;margin-top:10px;font-size:13px;color:var(--grey)}
+  .schedule .who::before{content:"— "}
+
+  .schedule li.build{background:var(--paper)}
+  .schedule li.build .time{color:var(--ink)}
+  .schedule li.build h3::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+    background:var(--mark);margin-left:9px;vertical-align:middle}
+
+  .schedule li.mark{position:relative}
+  .schedule li.mark::before{content:"";position:absolute;left:-32px;top:20px;bottom:22px;width:3px;background:var(--wash)}
+  @media (max-width:600px){.schedule li.mark::before{left:-20px}}
+
+  .rules{margin:0;padding:0;list-style:none;max-width:var(--measure)}
+  .rules li{padding:16px 0 18px;border-top:1px solid var(--rule);font-size:15.5px;color:#31363C}
+  .rules li:last-child{border-bottom:1px solid var(--rule)}
+
+  footer{margin-top:72px;padding-top:16px;border-top:1.5px solid var(--ink);
+    color:var(--grey);font-size:13.5px;max-width:var(--measure)}
+  footer a{color:var(--grey);text-decoration:underline}
+
+  @media print{
+    body{background:#fff}
+    .schedule li{page-break-inside:avoid}
+    .masthead nav{display:none}
+  }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <div class="masthead">
+    <p class="who">On &middot; Global HR Summit, Milano</p>
+    <p>Tuesday 15 September 2026 &middot; 13:00&ndash;16:00</p>
+    <nav>
+      <a href="index.html">Hub</a>
+      <a href="run-of-show.html" aria-current="page">Run of show</a>
+      <a href="survey.html">Survey</a>
+    </nav>
+  </div>
+
+  <h1>HR Agenthon, Milano</h1>
+  <p class="standfirst">Three hours to go from using AI to building with it. <b>1:00–4:00 PM</b>, in the room and on the floor.</p>
+
+  <section>
+    <h2 class="section">Running order</h2>
+    <ul class="schedule">
+      <li>
+        <span class="time">1:00–1:02 PM</span>
+        <div>
+          <h3>Welcome</h3>
+          <p>Why we are doing this, and how the afternoon works.</p>
+          <span class="who">Andreas</span>
+        </div>
+      </li>
+      <li>
+        <span class="time">1:02–1:25 PM</span>
+        <div>
+          <h3>Talk: from asking to building</h3>
+          <p>What your survey answers say about where this group actually is, and the shift that matters: asking a model for text, giving it the material and the rules, then building something that runs the same way every time. One HR workflow taken through all three, built live.</p>
+          <span class="who">Paulina</span>
+        </div>
+      </li>
+      <li>
+        <span class="time">1:25–1:35 PM</span>
+        <div>
+          <h3>Sharpen your idea</h3>
+          <p>In your team, agree on one thing to build. What triggers it, what comes out, and what counts as done by 3:20. If you already aligned before the summit, this takes five minutes and you start building early.</p>
+          <span class="who">Your team</span>
+        </div>
+      </li>
+      <li class="build">
+        <span class="time">1:35–3:20 PM</span>
+        <div>
+          <h3>Build</h3>
+          <p>Open the data pack, pick one folder, ignore the other six. Each folder has a start-here page with a first prompt you can paste straight in.</p>
+          <p>Take coffee whenever you need it. Claude teams: swap whoever is at the keyboard every twenty minutes, and stay on Sonnet. Lovable teams: everyone has a licence, so agree on one build before you all start six different ones.</p>
+          <span class="who">Your team, with Paulina and Andreas on the floor</span>
+        </div>
+      </li>
+      <li class="mark">
+        <span class="time">3:20–3:55 PM</span>
+        <div>
+          <h3>Show what you built</h3>
+          <p>A handful of teams come up and show their build in three minutes each. We pick them during the build, so expect to be asked. Working once is enough, nothing needs to be finished.</p>
+          <span class="who">Selected teams</span>
+        </div>
+      </li>
+      <li>
+        <span class="time">3:55–4:00 PM</span>
+        <div>
+          <h3>Round up and next steps</h3>
+          <p>What happens with these tools after Milano, and how to keep going on Monday.</p>
+          <span class="who">Andreas</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section">Two things that apply all afternoon</h2>
+    <ul class="rules">
+      <li>Everything runs on the synthetic data pack. Nothing connects to Workday or any live system, and no real employee or candidate details go into the tools.</li>
+      <li>Done means it worked once, in front of your team. Not production ready, not polished.</li>
+    </ul>
+  </section>
+
+  <footer>
+    HR Agenthon, Milano &middot; 15 September 2026 &middot; <a href="survey.html">See what the pre-event survey told us &rarr;</a>
+  </footer>
+
+</main>
+</body>
+</html>

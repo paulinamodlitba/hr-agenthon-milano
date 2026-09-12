@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HR Agenthon, Milano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5F7;
+    --ink:#0F1317;
+    --grey:#6B7178;
+    --rule:#D3D7DC;
+    --mark:#2B2FD6;
+    --wash:#D6D8F5;
+    --measure:66ch;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    font-variant-numeric:tabular-nums;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:1040px;margin:0 auto;padding:56px 32px 96px}
+  @media (max-width:640px){.sheet{padding:36px 20px 64px}}
+
+  a{color:var(--mark)}
+  :focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+
+  .masthead{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;
+    padding-bottom:14px;border-bottom:1.5px solid var(--ink)}
+  .masthead p{margin:0;color:var(--grey);font-size:14.5px}
+  .masthead .who{font-weight:600;color:var(--ink);font-size:14.5px}
+
+  h1{
+    font-size:clamp(2.3rem,6.2vw,4.1rem);
+    line-height:1.02;
+    letter-spacing:-0.032em;
+    font-weight:600;
+    margin:38px 0 0;
+    max-width:20ch;
+  }
+  .standfirst{max-width:var(--measure);margin:22px 0 0;font-size:19.5px;line-height:1.5}
+  .standfirst b{font-weight:600}
+
+  .cards{margin:56px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:0 36px}
+  @media (max-width:700px){.cards{grid-template-columns:1fr;gap:0}}
+  .card{padding:26px 0 30px;border-top:1.5px solid var(--ink)}
+  .card .eyebrow{font-size:13px;font-weight:600;letter-spacing:0.02em;color:var(--mark);
+    text-transform:uppercase;margin:0 0 10px}
+  .card h2{margin:0 0 10px;font-size:26px;font-weight:600;letter-spacing:-0.015em;line-height:1.2}
+  .card p{margin:0 0 20px;font-size:16px;color:#31363C;max-width:42ch}
+  .card a.go{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;
+    text-decoration:none;color:var(--ink);padding-bottom:2px;border-bottom:1.5px solid var(--ink)}
+  .card a.go:hover{color:var(--mark);border-color:var(--mark)}
+  .card a.go span{transition:transform .15s}
+  .card a.go:hover span{transform:translateX(3px)}
+
+  footer{margin-top:72px;padding-top:16px;border-top:1.5px solid var(--ink);
+    color:var(--grey);font-size:13.5px;max-width:var(--measure)}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <div class="masthead">
+    <p class="who">On &middot; Global HR Summit, Milano</p>
+    <p>15 September 2026 &middot; 1:00&ndash;4:00 PM</p>
+  </div>
+
+  <h1>HR Agenthon, Milano</h1>
+  <p class="standfirst">Three hours to go from using AI to building with it. Two pages for the room: what the afternoon looks like, and what you told us going in.</p>
+
+  <div class="cards">
+    <div class="card">
+      <p class="eyebrow">Schedule</p>
+      <h2>Run of show</h2>
+      <p>Minute by minute, 1:00 to 4:00 PM &mdash; welcome, the talk, sharpening your idea, the build, and showing what you made.</p>
+      <a class="go" href="run-of-show.html">Open the run of show <span>&rarr;</span></a>
+    </div>
+    <div class="card">
+      <p class="eyebrow">Pre-event survey</p>
+      <h2>Who is in the room</h2>
+      <p>105 responses on how you use AI today, what holds you back, and what would make this afternoon a win.</p>
+      <a class="go" href="survey.html">Open the survey results <span>&rarr;</span></a>
+    </div>
+  </div>
+
+  <footer>
+    HR Agenthon, Milano &middot; internal event pages, not for external distribution.
+  </footer>
+
+</main>
+</body>
+</html>
