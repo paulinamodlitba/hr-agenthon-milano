@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HR Agenthon, Milano: the talk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5F7;
+    --ink:#0F1317;
+    --grey:#6B7178;
+    --rule:#D3D7DC;
+    --mark:#2B2FD6;
+    --wash:#D6D8F5;
+    --measure:66ch;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    font-variant-numeric:tabular-nums;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:1040px;margin:0 auto;padding:56px 32px 96px}
+  @media (max-width:640px){.sheet{padding:36px 20px 64px}}
+
+  a{color:var(--mark)}
+  :focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+
+  .masthead{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;
+    padding-bottom:14px;border-bottom:1.5px solid var(--ink)}
+  .masthead p{margin:0;color:var(--grey);font-size:14.5px}
+  .masthead .who{font-weight:600;color:var(--ink);font-size:14.5px}
+  .masthead nav{margin-left:auto;display:flex;gap:20px}
+  .masthead nav a{font-size:14px;font-weight:600;text-decoration:none;color:var(--grey)}
+  .masthead nav a:hover,.masthead nav a[aria-current="page"]{color:var(--ink)}
+
+  h1{
+    font-size:clamp(2.1rem,5.4vw,3.4rem);
+    line-height:1.05;
+    letter-spacing:-0.03em;
+    font-weight:600;
+    margin:38px 0 0;
+    max-width:22ch;
+  }
+  .standfirst{max-width:var(--measure);margin:18px 0 0;font-size:18px;line-height:1.5;color:#31363C}
+
+  /* viewer */
+  .viewer{margin:44px 0 0}
+  .frame{
+    position:relative;
+    background:#fff;
+    border:1px solid var(--ink);
+    aspect-ratio:16/9;
+    overflow:hidden;
+  }
+  .frame img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+    background:#fff;
+    opacity:0;transition:opacity .18s ease;
+  }
+  .frame img.active{opacity:1}
+
+  .controls{
+    display:flex;align-items:center;gap:16px;margin-top:14px;
+  }
+  .controls button{
+    font-family:inherit;font-size:14px;font-weight:600;letter-spacing:0.01em;
+    background:var(--ink);color:#fff;border:none;border-radius:999px;
+    padding:9px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  }
+  .controls button:hover{background:var(--mark)}
+  .controls button:disabled{opacity:.35;cursor:default;background:var(--ink)}
+  .controls .count{font-size:14px;color:var(--grey);margin-left:auto}
+  .controls .hint{font-size:13px;color:var(--grey)}
+
+  .dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .dots button{
+    width:9px;height:9px;border-radius:50%;border:none;background:var(--rule);
+    padding:0;cursor:pointer;
+  }
+  .dots button.active{background:var(--mark);width:22px;border-radius:5px}
+
+  footer{margin-top:56px;padding-top:16px;border-top:1.5px solid var(--ink);
+    color:var(--grey);font-size:13.5px;max-width:var(--measure)}
+
+  @media (max-width:640px){
+    .controls .hint{display:none}
+  }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <div class="masthead">
+    <p class="who">On &middot; Global HR Summit, Milano</p>
+    <p>15 September 2026 &middot; the talk</p>
+    <nav>
+      <a href="index.html">Hub</a>
+      <a href="run-of-show.html">Run of show</a>
+      <a href="survey.html">Survey</a>
+      <a href="slides.html" aria-current="page">Slides</a>
+    </nav>
+  </div>
+
+  <h1>From asking to building</h1>
+  <p class="standfirst">The 1:02&ndash;1:25 PM talk, slide by slide. Use the arrows or the arrow keys to move through it.</p>
+
+  <div class="viewer">
+    <div class="frame" id="frame">
+      <!-- images injected by script -->
+    </div>
+    <div class="controls">
+      <button id="prev" aria-label="Previous slide">&larr; Prev</button>
+      <button id="next" aria-label="Next slide">Next &rarr;</button>
+      <span class="hint">Use the arrow keys too</span>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+
+  <footer>
+    HR Agenthon, Milano &middot; <a href="index.html">Back to the hub</a>
+  </footer>
+
+</main>
+<script>
+  const total = 13;
+  const frame = document.getElementById('frame');
+  const dotsEl = document.getElementById('dots');
+  const countEl = document.getElementById('count');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  let current = 0;
+
+  for (let i = 1; i <= total; i++) {
+    const img = document.createElement('img');
+    img.src = `slides/slide-${String(i).padStart(3,'0')}.jpg`;
+    img.alt = `Slide ${i} of ${total}`;
+    img.loading = i <= 2 ? 'eager' : 'lazy';
+    frame.appendChild(img);
+
+    const dot = document.createElement('button');
+    dot.setAttribute('aria-label', `Go to slide ${i}`);
+    dot.addEventListener('click', () => show(i - 1));
+    dotsEl.appendChild(dot);
+  }
+
+  const imgs = frame.querySelectorAll('img');
+  const dots = dotsEl.querySelectorAll('button');
+
+  function show(idx) {
+    current = Math.max(0, Math.min(total - 1, idx));
+    imgs.forEach((img, i) => img.classList.toggle('active', i === current));
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    countEl.textContent = `${current + 1} / ${total}`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  prevBtn.addEventListener('click', () => show(current - 1));
+  nextBtn.addEventListener('click', () => show(current + 1));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  show(0);
+</script>
+</body>
+</html>
